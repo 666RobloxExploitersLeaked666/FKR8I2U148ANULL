@@ -1,0 +1,64 @@
+local Lighting = game:GetService("Lighting")
+
+local function make(className, name, props)
+	local existing = Lighting:FindFirstChild(name)
+	if existing and existing.ClassName == className then
+		existing:Destroy()
+	end
+
+	local inst = Instance.new(className)
+	inst.Name = name
+	for prop, value in pairs(props) do
+		inst[prop] = value
+	end
+	inst.Parent = Lighting
+	return inst
+end
+
+make("Atmosphere", "Atmosphere", {
+	Color = Color3.new(0.0980392173, 0.176470593, 0.423529416),
+	Decay = Color3.new(0.196078435, 0.282352954, 0.360784322),
+	Density = 0.300000012,
+	Glare = 0,
+	Haze = 2.11999989,
+	Offset = 0,
+})
+
+make("Sky", "Sky", {
+	CelestialBodiesShown = true,
+	MoonAngularSize = 11,
+	MoonTextureId = "rbxassetid://1345054856",
+	SkyboxBk = "rbxassetid://627331893",
+	SkyboxDn = "rbxassetid://627331733",
+	SkyboxFt = "rbxassetid://627331981",
+	SkyboxLf = "rbxassetid://627331549",
+	SkyboxOrientation = Vector3.new(0, 0, 0),
+	SkyboxRt = "rbxassetid://627331779",
+	SkyboxUp = "rbxassetid://627332635",
+	StarCount = 3000,
+	SunAngularSize = 21,
+	SunTextureId = "rbxassetid://1345009717",
+})
+
+make("ColorCorrectionEffect", "ColorCorrection", {
+	Brightness = 0,
+	Contrast = 0,
+	Saturation = 0.100000001,
+	TintColor = Color3.new(1, 1, 1),
+	Enabled = true,
+})
+
+make("BloomEffect", "Bloom", {
+	Intensity = 1,
+	Size = 56,
+	Threshold = 0.949999988,
+	Enabled = true,
+})
+
+make("SunRaysEffect", "SunRays", {
+	Intensity = 0.0410000011,
+	Spread = 1,
+	Enabled = true,
+})
+
+print("LightingSetup: Effects inserted into Lighting (DepthOfField skipped).")
